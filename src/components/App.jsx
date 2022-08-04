@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
 import Section from './Section/Section';
-import Notification from './Notification/Notification';
+// import Notification from './Notification/Notification';
 
 const App = () => {
-  const [good, setGood] = useState(5);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(2);
+  const [good, setGood] = useState(JSON.parse(localStorage.getItem('good')));
+  const [neutral, setNeutral] = useState(
+    JSON.parse(localStorage.getItem('neutral'))
+  );
+  const [bad, setBad] = useState(JSON.parse(localStorage.getItem('bad')));
 
   const incrementValue = event => {
     switch (event.target.name) {
@@ -25,8 +27,15 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    window.localStorage.setItem('good', JSON.stringify(good));
+    window.localStorage.setItem('neutral', JSON.stringify(neutral));
+    window.localStorage.setItem('bad', JSON.stringify(bad));
+  }, [good, neutral, bad]);
+
   const countTotalFeedback = () => {
     const total = good + neutral + bad;
+    console.log(typeof total);
     return total;
   };
 

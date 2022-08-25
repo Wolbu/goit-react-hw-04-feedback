@@ -35,7 +35,6 @@ const App = () => {
 
   const countTotalFeedback = () => {
     const total = good + neutral + bad;
-    console.log(typeof total);
     return total;
   };
 

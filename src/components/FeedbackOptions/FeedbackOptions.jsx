@@ -1,9 +1,9 @@
-import './FeedbackOptions.css';
+import s from './FeedbackOptions.module.css';
 import PropTypes from 'prop-types';
 
 const FeedbackOptions = ({ options, incrementValue }) => {
   return (
-    <ul className="commentsButtons">
+    <ul className={s.commentsButtons}>
       {options.map(feedback => {
         return (
           <li key={feedback}>

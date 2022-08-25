@@ -5,11 +5,9 @@ import Section from './Section/Section';
 // import Notification from './Notification/Notification';
 
 const App = () => {
-  const [good, setGood] = useState(JSON.parse(localStorage.getItem('good')));
-  const [neutral, setNeutral] = useState(
-    JSON.parse(localStorage.getItem('neutral'))
-  );
-  const [bad, setBad] = useState(JSON.parse(localStorage.getItem('bad')));
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const incrementValue = event => {
     switch (event.target.name) {
@@ -26,6 +24,21 @@ const App = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    const goodComments = JSON.parse(localStorage.getItem('good'));
+    if (goodComments) {
+      setGood(goodComments);
+    }
+    const neutralComments = JSON.parse(localStorage.getItem('neutral'));
+    if (neutralComments) {
+      setGood(neutralComments);
+    }
+    const badComments = JSON.parse(localStorage.getItem('bad'));
+    if (badComments) {
+      setGood(badComments);
+    }
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem('good', JSON.stringify(good));
